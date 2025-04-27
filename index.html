@@ -1,25 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicción de Accidente Cerebrovascular</title>
     <link rel="stylesheet" href="style.css">
-    <script src="model.js" defer></script>
 </head>
 <body>
+    <h1>Predicción de Accidente Cerebrovascular (Stroke)</h1>
+    
+    <!-- Formulario para ingresar los datos -->
+    <form id="prediccionForm">
+        <label for="age">Edad:</label>
+        <input type="number" id="age" required><br>
 
-    <p>Prueba</p>
-    <input type="text" id="prueba" placeholder="Prueba"/>
-    <input type="text" id="email" placeholder="Email"/>
-    <input type="text" id="telefono" placeholder="Teléfono"/>
-    <button onclick="guardar()">Guardar prueba</button>
-    <p id="texto"></p>
+        <label for="hypertension">¿Tiene hipertensión?</label>
+        <select id="hypertension" required>
+            <option value="0">No</option>
+            <option value="1">Sí</option>
+        </select><br>
 
+        <label for="heart_disease">¿Tiene enfermedad cardíaca?</label>
+        <select id="heart_disease" required>
+            <option value="0">No</option>
+            <option value="1">Sí</option>
+        </select><br>
 
+        <label for="avg_glucose_level">Nivel promedio de glucosa:</label>
+        <input type="number" step="0.01" id="avg_glucose_level" required><br>
 
-<div id="esquina"></div>
-<div id="sorpresa-container">
-    <img src="ROG.webp" id="sorpresa"/>
-</div>
+        <label for="bmi">Índice de masa corporal (BMI):</label>
+        <input type="number" step="0.1" id="bmi" required><br>
 
+        <label for="gender">Género:</label>
+        <select id="gender" required>
+            <option value="Male">Masculino</option>
+            <option value="Female">Femenino</option>
+            <option value="Other">Otro</option>
+        </select><br>
 
+        <label for="ever_married">¿Ha estado casado?</label>
+        <select id="ever_married" required>
+            <option value="Yes">Sí</option>
+            <option value="No">No</option>
+        </select><br>
+
+        <label for="work_type">Tipo de trabajo:</label>
+        <select id="work_type" required>
+            <option value="Private">Privado</option>
+            <option value="Self-employed">Autoempleado</option>
+            <option value="children">Niños</option>
+            <option value="Never_worked">Nunca trabajado</option>
+        </select><br>
+
+        <label for="Residence_type">Tipo de residencia:</label>
+        <select id="Residence_type" required>
+            <option value="Urban">Urbano</option>
+            <option value="Rural">Rural</option>
+        </select><br>
+
+        <label for="smoking_status">Estado de fumar:</label>
+        <select id="smoking_status" required>
+            <option value="never smoked">Nunca fumado</option>
+            <option value="formerly smoked">Antes fumaba</option>
+            <option value="smokes">Fuma</option>
+        </select><br>
+
+        <button type="submit">Predecir riesgo</button>
+    </form>
+
+    <!-- Resultados de la predicción -->
+    <div id="resultado" style="display:none;">
+        <h2>Resultado de la predicción</h2>
+        <p id="prediccionResultado">Puntaje de riesgo: </p>
+        <p id="mensajeInterpretacion"></p>
+    </div>
+
+    <script src="model.js"></script>
 </body>
 </html>
