@@ -54,14 +54,6 @@ function predecirStroke(age, hypertension, heart_disease, avg_glucose_level, bmi
   return puntajeRiesgo;
 }
 
-function validar(age, hypertension, avg_glucose_level, bmi)
-{
-  if((age||hypertension||avg_glucose_level||bmi)<=0)
-  {const mensaje = "Rellene los datos correctamente"}
-
-  return mensaje;
-}
-
 // Llamar a la función cuando se envíe el formulario
 document.getElementById("prediccionForm").addEventListener("submit", function(event) {
   event.preventDefault(); // Evitar que el formulario se envíe
@@ -78,7 +70,11 @@ document.getElementById("prediccionForm").addEventListener("submit", function(ev
   const Residence_type = document.getElementById("Residence_type").value;
   const smoking_status = document.getElementById("smoking_status").value;
 
-
+  // Validar que los valores no sean menores o iguales a 0
+  if (age <= 0 || hypertension < 0 || heart_disease < 0 || avg_glucose_level <= 0 || bmi <= 0) {
+      alert("Por favor, ingresa valores mayores que 0 para todas las entradas numéricas.");
+      return; // Detener la ejecución si algún valor es inválido
+  }
 
   // Realizar la predicción
   const puntaje = predecirStroke(age, hypertension, heart_disease, avg_glucose_level, bmi, gender, ever_married, work_type, Residence_type, smoking_status);
