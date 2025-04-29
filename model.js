@@ -1,6 +1,24 @@
+// Función para escalar las variables numéricas
+function escalar(valor, media, desviacion) {
+  return (valor - media) / desviacion;
+}
+
 // Función para predecir el riesgo utilizando regresión logística
 function predecirStroke(age, hypertension, heart_disease, avg_glucose_level, bmi, gender, ever_married, work_type, Residence_type, smoking_status) {
-  // Coeficientes de la nueva regresión logística
+  // Medias y desviaciones estándar obtenidas de Python
+  const mediaEdad = 43.2;
+  const stdEdad = 22.5;
+  const mediaGlucosa = 106.1;
+  const stdGlucosa = 45.2;
+  const mediaBMI = 28.4;
+  const stdBMI = 7.8;
+
+  // Escalar las variables numéricas
+  const edadEscalada = escalar(age, mediaEdad, stdEdad);
+  const glucosaEscalada = escalar(avg_glucose_level, mediaGlucosa, stdGlucosa);
+  const bmiEscalado = escalar(bmi, mediaBMI, stdBMI);
+
+  // Coeficientes del modelo entrenado (debes usar los que salieron tras el escalado)
   const intercepto = -0.195;
   const coefAge = 1.577;
   const coefHypertension = -0.040;
@@ -9,50 +27,50 @@ function predecirStroke(age, hypertension, heart_disease, avg_glucose_level, bmi
   const coefBmi = -0.172;
   const coefGenderMale = 0.170;
   const coefEverMarriedYes = -0.023;
-  const coefWorkTypeNeverWorked = -0.109;
-  const coefWorkTypePrivate = 0.168;
-  const coefWorkTypeSelfEmployed = 0.031;
-  const coefWorkTypeChildren = 0.083;
-  const coefResidenceTypeUrban = 0.049;
-  const coefSmokingStatusFormerlySmoked = 0.103;
-  const coefSmokingStatusNeverSmoked = 0.019;
-  const coefSmokingStatusSmokes = 0.043;
+  const coefWorkNeverWorked = -0.109;
+  const coefWorkPrivate = 0.168;
+  const coefWorkSelfEmployed = 0.031;
+  const coefWorkChildren = 0.083;
+  const coefResidenceUrban = 0.049;
+  const coefSmokeFormer = 0.103;
+  const coefSmokeNever = 0.019;
+  const coefSmokeSmokes = 0.043;
 
   // Codificar variables categóricas
   const genderMale = (gender === 'Male') ? 1 : 0;
   const everMarriedYes = (ever_married === 'Yes') ? 1 : 0;
-  const workTypeNeverWorked = (work_type === 'Never_worked') ? 1 : 0;
-  const workTypePrivate = (work_type === 'Private') ? 1 : 0;
-  const workTypeSelfEmployed = (work_type === 'Self-employed') ? 1 : 0;
-  const workTypeChildren = (work_type === 'children') ? 1 : 0;
-  const residenceTypeUrban = (Residence_type === 'Urban') ? 1 : 0;
-  const smokingStatusFormerlySmoked = (smoking_status === 'formerly smoked') ? 1 : 0;
-  const smokingStatusNeverSmoked = (smoking_status === 'never smoked') ? 1 : 0;
-  const smokingStatusSmokes = (smoking_status === 'smokes') ? 1 : 0;
+  const workNeverWorked = (work_type === 'Never_worked') ? 1 : 0;
+  const workPrivate = (work_type === 'Private') ? 1 : 0;
+  const workSelfEmployed = (work_type === 'Self-employed') ? 1 : 0;
+  const workChildren = (work_type === 'children') ? 1 : 0;
+  const residenceUrban = (Residence_type === 'Urban') ? 1 : 0;
+  const smokeFormer = (smoking_status === 'formerly smoked') ? 1 : 0;
+  const smokeNever = (smoking_status === 'never smoked') ? 1 : 0;
+  const smokeSmokes = (smoking_status === 'smokes') ? 1 : 0;
 
-  // Calcular el logit(p)
+  // Calcular el logit
   const logit = intercepto
-    + coefAge * age
+    + coefAge * edadEscalada
     + coefHypertension * hypertension
     + coefHeartDisease * heart_disease
-    + coefAvgGlucoseLevel * avg_glucose_level
-    + coefBmi * bmi
+    + coefAvgGlucoseLevel * glucosaEscalada
+    + coefBmi * bmiEscalado
     + coefGenderMale * genderMale
     + coefEverMarriedYes * everMarriedYes
-    + coefWorkTypeNeverWorked * workTypeNeverWorked
-    + coefWorkTypePrivate * workTypePrivate
-    + coefWorkTypeSelfEmployed * workTypeSelfEmployed
-    + coefWorkTypeChildren * workTypeChildren
-    + coefResidenceTypeUrban * residenceTypeUrban
-    + coefSmokingStatusFormerlySmoked * smokingStatusFormerlySmoked
-    + coefSmokingStatusNeverSmoked * smokingStatusNeverSmoked
-    + coefSmokingStatusSmokes * smokingStatusSmokes;
+    + coefWorkNeverWorked * workNeverWorked
+    + coefWorkPrivate * workPrivate
+    + coefWorkSelfEmployed * workSelfEmployed
+    + coefWorkChildren * workChildren
+    + coefResidenceUrban * residenceUrban
+    + coefSmokeFormer * smokeFormer
+    + coefSmokeNever * smokeNever
+    + coefSmokeSmokes * smokeSmokes;
 
-  // Aplicar la función sigmoide para obtener la probabilidad
+  // Función sigmoide para obtener probabilidad
   const probabilidad = 1 / (1 + Math.exp(-logit));
-
-  return probabilidad; // devuelve la probabilidad entre 0 y 1
+  return probabilidad;
 }
+
 
 // Llamar a la función cuando se envíe el formulario
 document.getElementById("prediccionForm").addEventListener("submit", function(event) {
@@ -78,7 +96,7 @@ document.getElementById("prediccionForm").addEventListener("submit", function(ev
 
   // Realizar la predicción
   const probabilidad = predecirStroke(age, hypertension, heart_disease, avg_glucose_level, bmi, gender, ever_married, work_type, Residence_type, smoking_status);
-
+  console.log(age, hypertension, heart_disease, avg_glucose_level, bmi, gender, ever_married, work_type, Residence_type, smoking_status);
   // Mostrar el resultado
   const resultadoElemento = document.getElementById("resultado");
   const prediccionElemento = document.getElementById("prediccionResultado");
