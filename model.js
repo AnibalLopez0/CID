@@ -100,6 +100,8 @@ document.getElementById("prediccionForm").addEventListener("submit", function(ev
   // Mostrar el resultado
   const resultadoElemento = document.getElementById("resultado");
   const prediccionElemento = document.getElementById("prediccionResultado");
+  document.getElementById("resultado").classList.add("mostrar");
+document.getElementById("resultado").style.display = "block"; 
   prediccionElemento.textContent = "Probabilidad de riesgo: " + (probabilidad * 100).toFixed(2) + "%";
 
   // Mostrar el mensaje de interpretación

@@ -8,49 +8,96 @@ h1 {
   color: #333;
   display: block;
   text-align: center;
+  margin-bottom: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.title{
+  border-left: 6px solid #007bff;
+  border-top: 6px solid #007bff;
+  border-bottom: 6px solid #007bff;
+  border-right: 6px solid #007bff;
 }
 
 .contenedor {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px; /* espacio entre form y R2 */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: flex-start;
+gap: 40px;
+padding: 20px;
+}
+
+/* Columna izquierda */
+.columna-izquierda {
+flex: 1;
+}
+
+/* Columna derecha */
+.columna-derecha {
+flex: 1;
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+form, #resultado, #R2, .title {
+  background-color: #fff;
   padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  min-width: 300px;
+  box-sizing: border-box;
 }
 
 form {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  flex-grow: 1;
+  border-right: 6px solid #007bff;
+  border-bottom: 6px solid #007bff;
+}
+
+#resultado {
+  display: none;
+}
+
+#resultado.mostrar {
+  display: block;
+  background-color: #f5faff;
+  text-align: center;
+  font-size: 1.3rem;
+  border-left: 6px solid #007bff;
+  border-bottom: 6px solid #007bff;
+  font-weight: bold;
 }
 
 #R2 {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 20px; 
-  width: 400px; /* mismo ancho que el form para que se vea parejo */
-  text-align: center; 
+  background-color: #f5faff;
+  text-align: center;
+  font-size: 1.3rem;
+  border-left: 6px solid #007bff;
+  border-bottom: 6px solid #007bff;
+  font-weight: bold;
 }
 
-h6 {
-  font-size: xx-large;
+h6, h2 {
+  font-size: 1.6rem;
+  color: #007bff;
 }
-
 
 label {
   margin-top: 10px;
   display: block;
+  font-weight: bold;
 }
 
 input, select {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
 button {
@@ -59,20 +106,15 @@ button {
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
 button:hover {
   background-color: #0056b3;
-}
-
-#resultado {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #e7f4e7;
-  border: 1px solid #b0e0b0;
-  border-radius: 5px;
 }
 
 .mensaje {
