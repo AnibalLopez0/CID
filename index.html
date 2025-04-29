@@ -7,12 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <h1>Predicción de Accidente Cerebrovascular (Stroke)</h1>
-    
-    <!-- Formulario para ingresar los datos -->
+
+    <div class="contenedor">
+        <!-- Formulario para ingresar los datos -->
     <form id="prediccionForm">
         <label for="age">Edad:</label>
-        <input type="number" id="age" required><br>
+        <input type="number" id="age" min="1" required><br>
+
+        <label for="gender">Género:</label>
+        <select id="gender" required>
+            <option value="Male">Masculino</option>
+            <option value="Female">Femenino</option>
+            <option value="Other">Otro</option>
+        </select><br>
 
         <label for="hypertension">¿Tiene hipertensión?</label>
         <select id="hypertension" required>
@@ -27,17 +36,11 @@
         </select><br>
 
         <label for="avg_glucose_level">Nivel promedio de glucosa:</label>
-        <input type="number" step="0.01" id="avg_glucose_level" required><br>
+        <input type="number" step="0.01" id="avg_glucose_level" min="1" required><br>
 
         <label for="bmi">Índice de masa corporal (BMI):</label>
-        <input type="number" step="0.1" id="bmi" required><br>
+        <input type="number" step="0.1" id="bmi" min="1" required><br>
 
-        <label for="gender">Género:</label>
-        <select id="gender" required>
-            <option value="Male">Masculino</option>
-            <option value="Female">Femenino</option>
-            <option value="Other">Otro</option>
-        </select><br>
 
         <label for="ever_married">¿Ha estado casado?</label>
         <select id="ever_married" required>
@@ -50,7 +53,7 @@
             <option value="Private">Privado</option>
             <option value="Self-employed">Autoempleado</option>
             <option value="children">Niños</option>
-            <option value="Never_worked">Nunca trabajado</option>
+            <option value="Never_worked">Nunca ha trabajado</option>
         </select><br>
 
         <label for="Residence_type">Tipo de residencia:</label>
@@ -61,13 +64,18 @@
 
         <label for="smoking_status">Estado de fumar:</label>
         <select id="smoking_status" required>
-            <option value="never smoked">Nunca fumado</option>
+            <option value="never smoked">Nunca ha fumado</option>
             <option value="formerly smoked">Antes fumaba</option>
             <option value="smokes">Fuma</option>
         </select><br>
 
         <button type="submit">Predecir riesgo</button>
     </form>
+      
+        <div class="seccion" id="R2">
+            <h6>Precisión (Accuracy): 0.780</h6>
+        </div>
+      </div>
 
     <!-- Resultados de la predicción -->
     <div id="resultado" style="display:none;">
