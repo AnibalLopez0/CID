@@ -1,11 +1,21 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
+  background-color: #E6F0FA;
   padding: 20px;
 }
 
 h1 {
   color: #333;
+  display: block;
+  text-align: center;
+}
+
+.contenedor {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px; /* espacio entre form y R2 */
+  padding: 20px;
 }
 
 form {
@@ -13,9 +23,22 @@ form {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  margin: 0 auto;
+  width: 400px;
 }
+
+#R2 {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px; 
+  width: 400px; /* mismo ancho que el form para que se vea parejo */
+  text-align: center; 
+}
+
+h6 {
+  font-size: xx-large;
+}
+
 
 label {
   margin-top: 10px;
